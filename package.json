@@ -1,0 +1,105 @@
+{
+  "name": "auto-code-review",
+  "displayName": "Auto Code Review",
+  "description": "检查每日代码变更",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "auto-code-review.run",
+        "title": "Auto Code Review: 手动触发代码检查"
+      }
+    ],
+    "configuration": {
+      "title": "Auto Code Review",
+      "properties": {
+        "auto-code-review.diffDir": {
+          "type": "string",
+          "default": "",
+          "description": "diff 文件目录"
+        },
+        "auto-code-review.useDailySubDir": {
+          "type": "boolean",
+          "default": true,
+          "description": "是否从 diffDir 下的当日子目录，YYYY-MM-DD 读取 diff 文件"
+        },
+        "auto-code-review.resultDir": {
+          "type": "string",
+          "default": "",
+          "description": "检查结果输出目录"
+        },
+        "auto-code-review.skillFile": {
+          "type": "string",
+          "default": "",
+          "description": "skill 规则文件"
+        },
+        "auto-code-review.svnWorkingDir": {
+          "type": "string",
+          "default": "",
+          "description": "SVN 根目录，配置后 Agent 可直接引用源文件"
+        },
+        "auto-code-review.includeSvnSource": {
+          "type": "boolean",
+          "default": false,
+          "description": "是否在 prompt 中附加 SVN 源文件引用"
+        },
+        "auto-code-review.autoStart": {
+          "type": "boolean",
+          "default": false,
+          "description": "Cursor 启动时是否自动触发检查"
+        },
+        "auto-code-review.taskName": {
+          "type": "string",
+          "default": "code-review",
+          "description": "任务名称，用于远端接口路径 /api/review/checked/<task>"
+        },
+        "auto-code-review.waitTimeout": {
+          "type": "number",
+          "default": 300,
+          "description": "等待单个 Agent 回复超时时间（秒）"
+        },
+        "auto-code-review.checkMode": {
+          "type": "string",
+          "enum": [
+            "remote",
+            "local"
+          ],
+          "enumDescriptions": [
+            "通信模式：询问远端服务是否已检查",
+            "自查模式：检查本地结果文件是否存在"
+          ],
+          "default": "local",
+          "description": "判断今日是否已检查的方式"
+        },
+        "auto-code-review.remoteBaseUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:9150",
+          "description": "远端服务 HTTP 地址"
+        },
+        "auto-code-review.remoteCheckedApi": {
+          "type": "string",
+          "default": "/api/review/checked",
+          "description": "询问是否已检查的接口路径（GET ?date=YYYY-MM-DD）"
+        },
+        "auto-code-review.remoteDoneApi": {
+          "type": "string",
+          "default": "/api/review/done",
+          "description": "通知检查完成的接口路径（POST）"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "chardet": "^2.1.1",
+    "iconv-lite": "^0.7.2",
+    "robotjs": "^0.7.0"
+  }
+}
+

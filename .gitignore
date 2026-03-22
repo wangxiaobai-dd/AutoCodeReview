@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Packaged extension (build with vsce package)
+#*.vsix
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Optional build / test output
+out/
+dist/
+coverage/
+.nyc_output/
+
+# Local tooling
+*.tsbuildinfo
