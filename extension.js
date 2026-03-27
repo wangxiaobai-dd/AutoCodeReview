@@ -268,7 +268,7 @@ async function runWithAgentCli({ diffFiles, targetDir, resultFile, opts }) {
         const diffPath = path.join(targetDir, diffFile);
 
         log(`CLI 检查 (${i + 1}/${diffFiles.length}): ${diffFile}`);
-        setStatus(`CLI 检查中... ${diffFile} (${i + 1}/${diffFiles.length})`);
+        setStatus(`CLI 检查中(${i + 1}/${diffFiles.length})...${diffFile}`);
 
         try {
             const header   = buildResultHeader(diffFile, svnWorkingDir);
@@ -456,7 +456,7 @@ function updateProgressStatus(progress, doneFiles, diffFiles) {
     const pending  = doneFiles.filter(f => fs.existsSync(f)).length;
     const finished = progress.doneCount + pending;
     const cur      = Math.min(finished + 1, total);
-    setStatus(`检查中... ${diffFiles[cur - 1]} (${cur}/${total})`);
+    setStatus(`检查中 (${cur}/${total})...${diffFiles[cur - 1]} `);
 }
 
 // ═══════════════════════════════════════════════════════════
